@@ -1,0 +1,16 @@
+service: tipuch-lab
+
+provider:
+    name: aws
+    runtime: nodejs8.10
+    stage: dev
+    region: ca-central-1
+
+functions:
+    app:
+        handler: index.handler
+        events:
+            - http: ANY /
+            - http: 'ANY {proxy+}'
+plugins:
+    - serverless-offline
