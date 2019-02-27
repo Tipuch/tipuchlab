@@ -14,3 +14,11 @@ functions:
             - http: 'ANY {proxy+}'
 plugins:
     - serverless-offline
+    - serverless-domain-manager
+
+custom:
+    customDomain:
+        domainName: tipuchlab.com
+        basePath: ''
+        stage: $(self.provider.stage)
+        createRoute53Record: true
