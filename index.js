@@ -10,9 +10,12 @@ app.get('/', (req, res) => {
         endpoints: [
             {
                 name: 'home',
-                endpoint: `https://${req.hostname}/`
+                endpoint: `${req.protocol}://${req.hostname}${req.originalUrl}`
             },
-            { name: 'password generator', endpoint: `https://${req.hostname}/password/` }
+            {
+                name: 'password generator',
+                endpoint: `${req.protocol}://${req.hostname}${req.originalUrl}password/`
+            }
         ]
     });
 });

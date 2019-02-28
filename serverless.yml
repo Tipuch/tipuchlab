@@ -19,7 +19,8 @@ plugins:
 
 custom:
     customDomain:
+        stage: dev
         domainName: tipuchlab.com
+        certificateName: tipuchlab.com
         basePath: ''
         createRoute53Record: true
-        endpointType: 'regional'
