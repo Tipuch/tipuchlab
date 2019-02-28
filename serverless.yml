@@ -22,5 +22,4 @@ custom:
         stage: dev
         domainName: tipuchlab.com
         certificateName: tipuchlab.com
-        basePath: ''
         createRoute53Record: true
