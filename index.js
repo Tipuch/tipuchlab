@@ -15,6 +15,10 @@ app.get('/', (req, res) => {
             {
                 name: 'password generator',
                 endpoint: `${req.protocol}://${req.hostname}${req.originalUrl}password/`
+            },
+            {
+                name: 'coin flip',
+                endpoint: `${req.protocol}://${req.hostname}${req.originalUrl}coinflip/`
             }
         ]
     });
@@ -39,6 +43,14 @@ app.get('/password/', (req, res) => {
             'This is your password :) (you can use parameters ' +
             'passLength, hasPunctuation, hasUpper and hasNumbers in the url query to modify the result)',
         password: password.generatePassword(passLength, hasPunctuation, hasUpper, hasNumbers)
+    });
+});
+
+app.get('/coinflip/', (_, res) => {
+    const result = Math.round(Math.random()) === 0 ? 'heads' : 'tails';
+    res.send({
+        message: 'You flipped a coin and got:',
+        coinflip: result
     });
 });
 
