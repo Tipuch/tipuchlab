@@ -13,6 +13,7 @@
     "license": "ISC",
     "dependencies": {
         "express": "^4.16.4",
+        "express-query-boolean": "^2.0.0",
         "serverless-http": "^1.9.1"
     },
     "devDependencies": {

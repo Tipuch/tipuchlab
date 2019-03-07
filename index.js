@@ -1,8 +1,10 @@
 const serverless = require('serverless-http');
 const express = require('express');
+const boolParser = require('express-query-boolean');
 const password = require('./password.js');
 
 const app = express();
+app.use(boolParser());
 
 app.get('/', (req, res) => {
     res.send({
@@ -37,7 +39,6 @@ app.get('/password/', (req, res) => {
     const hasUpper = req.query.hasUpper === undefined ? undefined : Boolean(req.query.hasUpper);
     const hasNumbers =
         req.query.hasNumbers === undefined ? undefined : Boolean(req.query.hasNumbers);
-
     res.send({
         message:
             'This is your password :) (you can use parameters ' +
