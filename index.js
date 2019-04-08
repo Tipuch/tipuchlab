@@ -55,4 +55,25 @@ app.get('/coinflip/', (_, res) => {
     });
 });
 
+app.get('/dices/', (req, res) => {
+    let pattern = /^([d][0-9]+)/;
+    let dice_results = {
+        message: 'Here are your dice results:'
+    };
+    for (let dice in req.query) {
+        if (dice.match(pattern)) {
+            let dice_number = parseInt(req.query[dice]);
+            if (!Number.isNaN(dice_number)) {
+                // roll dices here
+                let dice_size = parseInt(dice.substring(1));
+                for (let i = 1; i <= dice_number; i++) {
+                    let result = Math.floor(1 + Math.random() * dice_size);
+                    dice_results[`${dice} (${i})`] = result;
+                }
+            }
+        }
+    }
+    res.send(dice_results);
+});
+
 module.exports.handler = serverless(app);

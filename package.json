@@ -6,7 +6,9 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "eslint '**/*.{js,jsx}' --quiet",
-        "format": "prettier --write '**/*.{js,jsx}'"
+        "format": "prettier --write **\\*.{js,jsx}",
+        "deploy": "serverless deploy",
+        "offline": "serverless offline"
     },
     "keywords": [],
     "author": "",
