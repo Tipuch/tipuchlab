@@ -65,16 +65,20 @@ app.get('/dices/', (req, res) => {
         message: 'Here are your dice results:'
     };
     const queryKeys = Object.keys(req.query);
+    const diceSizeLimit = 1000;
+    const diceNumberLimit = 1000;
     for (let i = 0; i < queryKeys.length; i += 1) {
         const dice = queryKeys[i];
         if (dice.match(pattern)) {
             const diceNumber = parseInt(req.query[dice], 10);
             if (!Number.isNaN(diceNumber)) {
-                // roll dices here
                 const diceSize = parseInt(dice.substring(1), 10);
-                for (let j = 1; j <= diceNumber; j += 1) {
-                    const result = Math.floor(1 + Math.random() * diceSize);
-                    diceResults[`${dice} (${j})`] = result;
+                if (!(diceNumber > diceNumberLimit && diceSize > diceSizeLimit)) {
+                    // roll dices here
+                    for (let j = 1; j <= diceNumber; j += 1) {
+                        const result = Math.floor(1 + Math.random() * diceSize);
+                        diceResults[`${dice} (${j})`] = result;
+                    }
                 }
             }
         }
