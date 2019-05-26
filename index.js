@@ -67,7 +67,7 @@ app.get('/coinflip/', (_, res) => {
 
 app.get('/dice/', (req, res) => {
     /*
-     * This route will roll given dice parameters.
+     * This route will roll dice.
      */
     // this pattern (e.g: d5) is used to pass query parameters for dice.
     const pattern = /^([d][0-9]+)/;
