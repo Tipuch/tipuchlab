@@ -21,6 +21,10 @@ app.get('/', (req, res) => {
             {
                 name: 'coin flip',
                 endpoint: `${req.protocol}://${req.hostname}${req.originalUrl}coinflip/`
+            },
+            {
+                name: 'dice roller',
+                endpoint: `${req.protocol}://${req.hostname}${req.originalUrl}dices/`
             }
         ]
     });
@@ -56,24 +60,26 @@ app.get('/coinflip/', (_, res) => {
 });
 
 app.get('/dices/', (req, res) => {
-    let pattern = /^([d][0-9]+)/;
-    let dice_results = {
+    const pattern = /^([d][0-9]+)/;
+    const diceResults = {
         message: 'Here are your dice results:'
     };
-    for (let dice in req.query) {
+    const queryKeys = Object.keys(req.query);
+    for (let i = 0; i < queryKeys.length; i += 1) {
+        const dice = queryKeys[i];
         if (dice.match(pattern)) {
-            let dice_number = parseInt(req.query[dice]);
-            if (!Number.isNaN(dice_number)) {
+            const diceNumber = parseInt(req.query[dice], 10);
+            if (!Number.isNaN(diceNumber)) {
                 // roll dices here
-                let dice_size = parseInt(dice.substring(1));
-                for (let i = 1; i <= dice_number; i++) {
-                    let result = Math.floor(1 + Math.random() * dice_size);
-                    dice_results[`${dice} (${i})`] = result;
+                const diceSize = parseInt(dice.substring(1), 10);
+                for (let j = 1; j <= diceNumber; j += 1) {
+                    const result = Math.floor(1 + Math.random() * diceSize);
+                    diceResults[`${dice} (${j})`] = result;
                 }
             }
         }
     }
-    res.send(dice_results);
+    res.send(diceResults);
 });
 
 module.exports.handler = serverless(app);
