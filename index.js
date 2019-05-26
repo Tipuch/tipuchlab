@@ -31,6 +31,9 @@ app.get('/', (req, res) => {
 });
 
 app.get('/password/', (req, res) => {
+    /*
+     * This route will generate a password with sane defaults and optional parameters.
+     */
     const passLength =
         req.query.passLength === undefined ? undefined : parseInt(req.query.passLength, 10);
 
@@ -52,6 +55,9 @@ app.get('/password/', (req, res) => {
 });
 
 app.get('/coinflip/', (_, res) => {
+    /*
+     * This route will flip a coin.
+     */
     const result = Math.round(Math.random()) === 0 ? 'heads' : 'tails';
     res.send({
         message: 'You flipped a coin and got:',
@@ -59,7 +65,11 @@ app.get('/coinflip/', (_, res) => {
     });
 });
 
-app.get('/dices/', (req, res) => {
+app.get('/dice/', (req, res) => {
+    /*
+     * This route will roll given dice parameters.
+     */
+    // this pattern (e.g: d5) is used to pass query parameters for dice.
     const pattern = /^([d][0-9]+)/;
     const diceResults = {
         message: 'Here are your dice results:'
@@ -74,7 +84,7 @@ app.get('/dices/', (req, res) => {
             if (!Number.isNaN(diceNumber)) {
                 const diceSize = parseInt(dice.substring(1), 10);
                 if (!(diceNumber > diceNumberLimit && diceSize > diceSizeLimit)) {
-                    // roll dices here
+                    // roll dice here
                     for (let j = 1; j <= diceNumber; j += 1) {
                         const result = Math.floor(1 + Math.random() * diceSize);
                         diceResults[`${dice} (${j})`] = result;
