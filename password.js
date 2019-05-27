@@ -16,6 +16,7 @@ exports.generatePassword = (
     hasUpper = true,
     hasNumbers = true
 ) => {
+    const maxPassLength = 1000;
     const lower = 'abcdefghijklmnopqrstuvwxyz'.split('');
     const characters = lower;
     const numbers = '0123456789'.split('');
@@ -38,6 +39,9 @@ exports.generatePassword = (
         for (let i = 0; i < randomBuffer.length; i += 1) {
             const index = randomBuffer[i] % characters.length;
             password += characters[index];
+            if (i + 1 >= maxPassLength) {
+                break;
+            }
         }
         passwordRequirements = hasAtLeastOne(password, lower);
         if (hasNumbers) {
